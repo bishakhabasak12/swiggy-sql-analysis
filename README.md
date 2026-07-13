@@ -24,7 +24,20 @@ company would actually care about:
    - `cost`: stripped to a plain numeric value
 3. Load into SQLite using `schema.sql`
 4. Run the queries in `/queries` in order
+   
+## Interactive Dashboard (Power BI)
 
+The findings below are also built into an interactive Power BI dashboard —
+KPI cards, cost-tier vs rating analysis, cuisine breakdown, top cities, and
+a city slicer that filters every visual.
+
+![Swiggy Power BI Dashboard](dashboard/dashboard.png)
+
+**Files:** [`dashboard/swiggy-dashboard.pbix`](dashboard/swiggy-dashboard.pbix) — open in Power BI Desktop (free) for the interactive version.
+
+Highlights:
+- The ₹200–399 tier is both the largest segment (~39K restaurants) and the lowest rated (3.86 avg) — visible at a glance in the combo chart
+- All dashboard numbers verified against the SQL query results
 ## Findings
 
 **1. The restaurant market is far more spread out than expected — it is not concentrated in a few big cities.**
@@ -62,4 +75,4 @@ If advising Swiggy's ops/quality team, I'd prioritize quality-improvement progra
 - Normalize the `city` field to true city level (strip locality suffixes) and re-run the concentration/ranking analysis
 - Join in city population data to compute restaurants-per-capita (true market-gap analysis)
 - Compare against the Zomato dataset for a head-to-head city-by-city view
-- Move this into Power BI/Tableau for an interactive version
+
