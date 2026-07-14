@@ -24,20 +24,31 @@ company would actually care about:
    - `cost`: stripped to a plain numeric value
 3. Load into SQLite using `schema.sql`
 4. Run the queries in `/queries` in order
-   
-## Interactive Dashboard (Power BI)
 
-The findings below are also built into an interactive Power BI dashboard —
-KPI cards, cost-tier vs rating analysis, cuisine breakdown, top cities, and
-a city slicer that filters every visual.
+## Interactive Dashboards (Power BI + Tableau)
+
+The findings below are also built into interactive dashboards — KPI cards,
+cost-tier vs rating analysis, cuisine breakdown, top cities, and a city
+slicer that filters every visual.
 
 ![Swiggy Power BI Dashboard](dashboard/dashboard.png)
 
 **Files:** [`dashboard/swiggy-dashboard.pbix`](dashboard/swiggy-dashboard.pbix) — open in Power BI Desktop (free) for the interactive version.
 
+### Tableau version (live)
+
+The same analysis rebuilt in Tableau Public, with an added **map of India**
+showing restaurant density (dot size) and average rating (color) by city.
+
+**[View the live interactive dashboard on Tableau Public →](https://public.tableau.com/app/profile/bishakha.basak/viz/SwiggyRestaurantMarketAnalysis/SwiggyRestaurantMarketAnalysis148KRestaurants800Cities)**
+
+No download needed — it runs in the browser. The Tableau workbook (.twbx)
+can also be downloaded directly from the Tableau Public page.
+
 Highlights:
 - The ₹200–399 tier is both the largest segment (~39K restaurants) and the lowest rated (3.86 avg) — visible at a glance in the combo chart
 - All dashboard numbers verified against the SQL query results
+
 ## Findings
 
 **1. The restaurant market is far more spread out than expected — it is not concentrated in a few big cities.**
@@ -70,9 +81,9 @@ If advising Swiggy's ops/quality team, I'd prioritize quality-improvement progra
 - The `city` field mixes true cities with specific localities/neighborhoods, which affects any city-level ranking (see Finding 2).
 - Cuisine bucketing relies on simple keyword matching against a fixed list; more precise category mapping would reduce the size of the "Other" bucket.
 - Ratings and rating counts reflect a single point-in-time scrape, not a time series — no trend analysis is possible with this dataset alone.
+- On the Tableau map, ~439 locality-style city values (e.g. "BTM,Bangalore") can't be geocoded and are excluded from the map view; the other ~380 cities plot normally.
 
 ## What I'd extend next
 - Normalize the `city` field to true city level (strip locality suffixes) and re-run the concentration/ranking analysis
 - Join in city population data to compute restaurants-per-capita (true market-gap analysis)
 - Compare against the Zomato dataset for a head-to-head city-by-city view
-
